@@ -14,7 +14,7 @@ function EVENT:Begin()
     timer.Create("weapondrop", GetConVar("randomat_butter_timer"):GetInt(), 0, function()
         for _, ply in ipairs(self:GetAlivePlayers(true)) do
             if not affected or affect_all then
-                local wep = ply:GetActiveWeapon()
+                local wep = ply.GetActiveWeapon and ply:GetActiveWeapon() or nil
                 if IsValid(wep) and wep.AllowDrop then
                     affected = true
                     ply:DropWeapon(wep)

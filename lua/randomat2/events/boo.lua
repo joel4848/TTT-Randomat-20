@@ -46,10 +46,13 @@ function EVENT:Begin()
                 -- Reset the player's power
                 ply:SetNWInt("RdmtBooPower", 0)
 
-                -- Make the target drop their weapon
-                target:DropWeapon()
-                -- Reset FOV to unscope
-                target:SetFOV(0, 0.2)
+                -- Make the target drop their weapon, if it's droppable
+                local wep = target.GetActiveWeapon and target:GetActiveWeapon() or nil
+                if IsValid(wep) and wep.AllowDrop then
+                    target:DropWeapon(wep)
+                    -- Reset FOV to unscope
+                    target:SetFOV(0, 0.2)
+                end
 
                 -- Create and deploy ghost
                 local ghost = ents.Create("npc_kleiner")
