@@ -236,11 +236,20 @@ Optionally, this can be a table of segments with formatting flags that will be u
 **ConVars** - The table of ConVar names to save and load automatically, in addition to what is provided by `EVENT:GetConVars()`. Defaults to a table containing the auto-generated ConVars for this event.\
 *Realm:* Server
 
-**Description** - The description for this event. Automatically shown on screen and in each player's chat if event notifications are enabled. Also shown on each event's page in the Randomat 2.0 ULX module. Defaults to `nil`.\
+**Description** - The description for this event. If event notifications are enabled, automatically shown on screen and in each player's chat (if `DisplayDescription` is not defined). Also shown on each event's page in the Randomat 2.0 ULX module if `DisplayDescription` and `ExtDescription` are not defined. Defaults to `nil`.\
 Optionally, this can be a table of segments with formatting flags that will be used to build the description string. *(See `Randomat:Notify` below)*\
 *Realm:* Server
 
-**ExtDescription** - The extended description for this event. Shown on each event's page in the Randomat 2.0 ULX module instead of the `Description`. Defaults to `nil`.\
+**DisplayDescription** - The description for this event in an unformatted displayable form. Used in place of `Description` in chat notifications and the Randomat 2.0 ULX module. Defaults to `nil`.\
+*Realm:* Server
+
+**DisplayAltTitle** - The alternative title for this event in an unformatted displayable form. Used in place of `AltTitle` in chat notifications and the Randomat 2.0 ULX module. Defaults to `nil`.\
+*Realm:* Server
+
+**DisplayTitle** - The title for this event in an unformatted displayable form. Used in place of `Title` or `AltTitle` in chat notifications and the Randomat 2.0 ULX module. Defaults to `nil`.\
+*Realm:* Server
+
+**ExtDescription** - The extended description for this event. Shown on each event's page in the Randomat 2.0 ULX module instead of the `DisplayDescription` or `Description`. Defaults to `nil`.\
 *Realm:* Server
 
 **Id (aka id)** - The unique identifier for this event. **This must be defined for the event to work**.\
@@ -500,7 +509,7 @@ Methods belonging to the `Randomat` namespace that are available globally, withi
 
 *Returns:* The list of all used event categories
 
-**Randomat:GetEventAltTitle(event)** - Gets the given event's `AltTitle` property as a readable string.\
+**Randomat:GetEventAltTitle(event)** - Gets the given event's `DisplayAltTitle` or `AltTitle` property as a readable string.\
 *Realm:* Client and Server\
 *Parameters:*
 - *event* - The event object whose alternative title is being retrieved
@@ -515,14 +524,14 @@ Methods belonging to the `Randomat` namespace that are available globally, withi
 
 *Returns:* The comma-delimited list of categories for the given event
 
-**Randomat:GetEventDescription(event)** - Gets the given event's `Description` property as a readable string.\
+**Randomat:GetEventDescription(event)** - Gets the given event's `DisplayDescription` or `Description` property as a readable string.\
 *Realm:* Client and Server\
 *Parameters:*
 - *event* - The event object whose description is being retrieved
 
 *Returns:* The event's usable description
 
-**Randomat:GetEventTitle(event, skip_alt_title)** - Gets the given event's `Title` or `AltTitle` (if `skip_alt_title` is `false` or not provided) property, whichever is defined, as a readable string.\
+**Randomat:GetEventTitle(event, skip_alt_title)** - Gets the given event's `DisplayTitle`, `Title`, or `AltTitle` (if `skip_alt_title` is `false` or not provided) property, whichever is defined, as a readable string.\
 *Realm:* Client and Server\
 *Parameters:*
 - *event* - The event object whose title is being retrieved

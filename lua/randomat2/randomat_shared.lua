@@ -22,9 +22,10 @@ function Randomat:IsEventActive(id)
 end
 
 function Randomat:GetEventTitle(event, skip_alt_title)
-    local title = event.Title and event.Title or ""
+    local title = (event.DisplayTitle and event.DisplayTitle) or
+                    (event.Title and event.Title) or ""
     if not skip_alt_title and title == "" then
-        title = event.AltTitle
+        title = Randomat:GetEventAltTitle(event)
     end
 
     if type(title) == "table" then
@@ -35,7 +36,8 @@ function Randomat:GetEventTitle(event, skip_alt_title)
 end
 
 function Randomat:GetEventAltTitle(event)
-    local title = event.AltTitle and event.AltTitle or ""
+    local title = (event.DisplayAltTitle and event.DisplayAltTitle) or
+                    (event.AltTitle and event.AltTitle) or ""
     if type(title) == "table" then
         local titles = table.MemberValuesFromKey(title, "text")
         return table.concat(titles)
@@ -44,7 +46,8 @@ function Randomat:GetEventAltTitle(event)
 end
 
 function Randomat:GetEventDescription(event)
-    local description = event.Description and event.Description or ""
+    local description = (event.DisplayDescription and event.DisplayDescription) or
+                        (event.Description and event.Description) or ""
     if type(description) == "table" then
         local descriptions = table.MemberValuesFromKey(description, "text")
         return table.concat(descriptions)
