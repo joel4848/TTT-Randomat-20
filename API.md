@@ -119,6 +119,15 @@ All methods below are automatically defined for every event but events can overr
 - *textboxes* - Table of convar objects that should be configurable using textboxes
   - *cmd* - The portion of the convar name that comes after `randomat_{EVENT_ID}_` (e.g. "interval" from `randomat_lonelyyogs_interval`)
   - *dsc* - The description of this convar
+- *layout* - Table of layout for the convars provided by this event. Any convar not in this table will be added to the end, ordered by however they are provided in the `sliders`, `checks`, and `textboxes` tables
+  - *Key* - The portion of the convar name that comes after `randomat_{EVENT_ID}_` (e.g. "interval" from `randomat_lonelyyogs_interval`) OR the name of the convar group being defined
+  - *Value* - One of the following:
+    - A number representing the overall position this convar should show in
+    - A table describing a grouping of convars with the following properties
+      - *pos* - A number representing the overall position this convar group should show in
+      - *collapsible* - Whether this group should be collapsible (defaults to `false`)
+      - *expanded* - Whether this collapsible group should default to being expanded (defaults to `false`)
+      - *items* - The table of convars to include in this group, only including the portion of the convar name that comes after `randomat_{EVENT_ID}_` (e.g. "interval" from `randomat_lonelyyogs_interval`)
 
 **EVENT:GetPlayers(shuffle)** - Gets a table of all players.\
 *Realm:* Server\
