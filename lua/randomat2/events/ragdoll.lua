@@ -1,5 +1,8 @@
 local EVENT = {}
 
+util.AddNetworkString("RdmtRagdollRagdolled")
+util.AddNetworkString("RdmtRagdollUnragdolled")
+
 CreateConVar("randomat_ragdoll_time", 1.5, FCVAR_NONE, "The time the player is ragdolled", 0.5, 10)
 CreateConVar("randomat_ragdoll_delay", 1.5, FCVAR_NONE, "The time between ragdolls", 0.5, 10)
 
@@ -142,6 +145,12 @@ function EVENT:UnRagdollPlayer(v)
             end
         end)
     end
+
+    -- Delay so the client has time to try and render the weapon pickups we just triggered
+    timer.Simple(0.1, function()
+        net.Start("RdmtRagdollUnragdolled")
+        net.Send(v)
+    end)
 end
 
 function EVENT:RagdollPlayer(v)
@@ -238,6 +247,9 @@ function EVENT:RagdollPlayer(v)
             self:UnRagdollPlayer(v)
         end
     end)
+
+    net.Start("RdmtRagdollRagdolled")
+    net.Send(v)
 end
 
 function EVENT:Begin()
