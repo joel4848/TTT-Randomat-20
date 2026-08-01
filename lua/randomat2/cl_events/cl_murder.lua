@@ -21,13 +21,13 @@ net.Receive("MurderEventActive", function()
 
     local blindIdx = 0
 
-    local y = ScrH() - 60
     local x = 19.6
+    local y = ScrH() - 60
 
     if CR_VERSION then
-        hook.Add("TTTHUDInfoPaint", "RandomatMurderUIPos", function(client, label_left, label_top, active_labels)
-            y = ScrH() - label_top + #active_labels * 20 + 80
-            x = label_left + 9.6
+        hook.Add("TTTHUDInfoPaint", "RandomatMurderUIPos", function(client, _, _, _, HUDX, HUDY)
+            x = HUDX + 9.6
+            y = HUDY + 74
         end)
     end
 
