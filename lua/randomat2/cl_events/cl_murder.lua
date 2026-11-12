@@ -908,9 +908,10 @@ function EVENT:End()
         originalStartPopupFunction = nil
     end
 
-    if not tauntMenuOpen then return end
-    tauntMenuOpen = false
-    GUIEnableScreenClicker(false)
+    if not tauntMenuOpen then
+        tauntMenuOpen = false
+        GUIEnableScreenClicker(false)
+    end
 
     RestoreRoleStrings()
 
