@@ -479,7 +479,7 @@ end
 
 function SWEP:PinRagdoll()
     if not GetConVar("ttt_ragdoll_pinning"):GetBool() then return end
-    if not self:GetOwner():IsTraitor() and not innocentPinRagdollConVar:GetBool() then return end
+    if not self:GetOwner():IsTraitor() and not GetConVar("ttt_ragdoll_pinning_innocents"):GetBool() then return end
 
     local rag = self.EntHolding
     local ply = self:GetOwner()
@@ -531,7 +531,7 @@ end
 if SERVER then
     function SWEP:Initialize()
         self.dt.can_rag_pin = GetConVar("ttt_ragdoll_pinning"):GetBool()
-        self.dt.can_rag_pin_inno = innocentPinRagdollConVar:GetBool()
+        self.dt.can_rag_pin_inno = GetConVar("ttt_ragdoll_pinning_innocents"):GetBool()
         self.dt.carried_rag = nil
 
         return self.BaseClass.Initialize(self)
