@@ -676,6 +676,7 @@ function EVENT:Begin()
     reloadKey     = input.LookupBinding("+reload") and input.GetKeyCode(input.LookupBinding("+reload")) or KEY_R
     reloadKeyName = StringUpper(input.GetKeyName(reloadKey))
 
+    RestoreRoleStrings()
     OverrideRoleStrings()
 
     self:AddHook("HUDPaint", DrawHUD)
